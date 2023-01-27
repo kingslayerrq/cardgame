@@ -24,4 +24,16 @@ public class CardListen : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         
     }
+    public void OnPointerDown(PointerEventData data){
+
+    }
+    public void OnPointerUp(PointerEventData data){
+
+    }
+    public void OnPointerExit(PointerEventData data){
+
+    }
+    public void OnPointerEnter(PointerEventData data){
+
+    }
 }

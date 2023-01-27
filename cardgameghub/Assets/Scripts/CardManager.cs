@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CardManager : Singleton<CardManager> // handles card actions, card counts in draw/discard/hand pile
+public class CardManager : MonoBehaviour // handles card actions, card counts in draw/discard/hand pile
 {
     [SerializeField]
     private GameObject CardPrefab;

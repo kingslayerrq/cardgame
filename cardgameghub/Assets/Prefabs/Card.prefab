@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1267865533540854080}
   - component: {fileID: 49579665277600245}
+  - component: {fileID: 5461257595129509379}
+  - component: {fileID: 5071518605779853995}
   - component: {fileID: 3735892757089714809}
-  - component: {fileID: -7599911529977023112}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -47,6 +48,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2718275571835332412}
   m_CullTransparentMesh: 1
+--- !u!114 &5461257595129509379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718275571835332412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892b96b0f5cf27846b567d00f97c7ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5071518605779853995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718275571835332412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96da7996f8b841e409ddb6faf4e0a0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  img: []
+  cardId: 0
+  imageIndex: 0
+  dmgNum: 0
+  cardType: 0
+  dmgType: 0
+  target: 0
+  cardTitle: {fileID: 0}
+  cardDescription: {fileID: 0}
 --- !u!114 &3735892757089714809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,25 +112,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-7599911529977023112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2718275571835332412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96da7996f8b841e409ddb6faf4e0a0a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  img: []
-  cardId: 0
-  imageIndex: 0
-  dmgNum: 0
-  cardType: 0
-  dmgType: 0
-  target: 0
-  cardTitle: {fileID: 0}
-  cardDescription: {fileID: 0}
