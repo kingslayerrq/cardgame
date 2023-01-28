@@ -52,7 +52,9 @@ public class CircularNodeGenerator : MonoBehaviour
         spawnPos.position = new Vector3(x, y, 0f);
         for (int i = 0; i < endRoomNum; i++)
         {
-            createEndNode(baseNode, spawnPos.position);
+            if (createEndNode(baseNode, spawnPos.position)==false){
+                break;
+            }
         }
 
     }
@@ -69,16 +71,21 @@ public class CircularNodeGenerator : MonoBehaviour
 
     
 
-    private void updateSpawnPos() //update spawnPos for endRoom node (currently)
+    private bool updateSpawnPos() //update spawnPos for endRoom node (currently)
     {
+        int count = 0;
         do
         {
+            count++;//count for number of failure, if fail 10 times, impossible to generate, so return false to stop generating
+            if(count == 10){
+                return false;
+            }
             double angleRad = (UnityEngine.Random.Range(0, 361) * MathF.PI) / 180; // angle in radian
             float x = (float)(centerPos.position.x + maxRadius * math.cos(angleRad));
             float y = (float)(centerPos.position.y + maxRadius * math.sin(angleRad));
             spawnPos.position = new Vector3(x, y, 0f);
         }while (checkRoomGap(spawnPos.position, endRoomNodeList) == false); // keep randomizing until within range of x,y offsets
-
+        return true;
         
     }
 
@@ -88,11 +95,7 @@ public class CircularNodeGenerator : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Node y = nodeList[i];
-            if (xdistance(x, y.transform) < minxOffset ^ 
-            ydistance(x, y.transform) < minyOffset ^
-            xdistance(x, y.transform) > maxxOffset ^
-            ydistance(x, y.transform) > maxyOffset ^
-            distance(x, y.transform) < minGeneralOffset)
+            if (distance(x, y.transform) < minGeneralOffset)
             {
                 return false;
             }
@@ -101,11 +104,14 @@ public class CircularNodeGenerator : MonoBehaviour
         
         return true;
     }
-    private void createEndNode(GameObject roomNode, Vector3 pos)
+    private bool createEndNode(GameObject roomNode, Vector3 pos)//create end room node, return true if generate is successful
     {
         GameObject obj = Instantiate(roomNode, pos, Quaternion.identity);
         endRoomNodeList.Add(obj.GetComponent<Node>());
-        updateSpawnPos();
+        if (updateSpawnPos()==true){
+            return true;
+        }
+        return false;//return false if cannot find a place to generate room 
     }
     private void createNode(GameObject roomNode, Vector3 pos)
     {
