@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237f711f85583c74f9670a8461100ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endRoomNum: 6
+  endRoomNum: 5
+  regRoomNum: 6
   minxOffset: 1
   minyOffset: 1
   maxxOffset: 3
@@ -325,6 +326,7 @@ MonoBehaviour:
   centerPos: {fileID: 758989398}
   spawnPos: {fileID: 715790283}
   baseNode: {fileID: 636670069265535464, guid: 4295dacb74e5ef740b7ca4733c7e15a7, type: 3}
+  endNode: {fileID: 3567669013558582080, guid: 04687416c98d1be4996b0037aa46c78c, type: 3}
   angleRad: 0
   roomNodeList: []
   endRoomNodeList: []
