@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237f711f85583c74f9670a8461100ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endRoomNum: 4
+  endRoomNum: 6
   minxOffset: 1
   minyOffset: 1
   maxxOffset: 3
