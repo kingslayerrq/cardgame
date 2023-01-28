@@ -44,7 +44,7 @@ public class CircularNodeGenerator : MonoBehaviour
     // list of all room nodes
     public List<Node> roomNodeList = new List<Node>();
     // list of endRoom nodes
-    public List<Node> endRoomNodeList = new List<Node>();
+    //public List<Node> endRoomNodeList = new List<Node>();
 
     // Start is called before the first frame update
     void Start()
