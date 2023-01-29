@@ -64,6 +64,7 @@ public class CircularNodeGenerator : MonoBehaviour
                 break;
             }
         }
+        // reinitialize spawnPos for regular room
         spawnPos.position = new Vector3((float)(centerPos.position.x + UnityEngine.Random.Range(minGeneralOffset, maxRadius - minGeneralOffset) * math.cos(angleRad)),
             (float)(centerPos.position.y + UnityEngine.Random.Range(minGeneralOffset, maxRadius - minGeneralOffset) * math.sin(angleRad)),
             0f);
@@ -88,7 +89,7 @@ public class CircularNodeGenerator : MonoBehaviour
 
     
 
-    private bool updateSpawnPos(float radius) //update spawnPos for endRoom node (currently)
+    private bool updateSpawnPos(float radius) //update spawnPos using radius + sin/cos theta
     {
         int count = 0;
         do

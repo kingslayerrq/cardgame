@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RoomNodesGenerator : MonoBehaviour
@@ -32,6 +33,13 @@ public class RoomNodesGenerator : MonoBehaviour
     private float maxxOffset;
     [SerializeField]
     private float maxyOffset;
+    [SerializeField]
+    private float minGeneralOffset;
+    [SerializeField]
+    private float xBound;
+    [SerializeField]
+    private float yBound;
+
 
     public Transform spawnPos;
     public GameObject baseNode;
@@ -53,7 +61,7 @@ public class RoomNodesGenerator : MonoBehaviour
         
     }
 
-    // return xoffset, yoffset
+    // return randomized xoffset, yoffset for next spawnPos
     private float randomizeXoffset()
     {
         return UnityEngine.Random.Range(minxOffset, maxxOffset);
@@ -69,7 +77,12 @@ public class RoomNodesGenerator : MonoBehaviour
         for (int i = 0; i < roomNum; i++)
         {
             createNode(baseNode, spawnPos.position);
-            randomizeNode();
+            do
+            {
+                randomizeNode();
+            } while (checkRoomGap(spawnPos.position, roomNodeList) == false);
+            Debug.Log(spawnPos.position.x < -xBound);
+            
         }
     }
 
@@ -78,9 +91,47 @@ public class RoomNodesGenerator : MonoBehaviour
     {
         GameObject obj = Instantiate(roomNode, pos, Quaternion.identity);
         roomNodeList.Add(obj.GetComponent<Node>());
+
+        
         
     }
-    // determines next nodes generation direction
+    private bool checkRoomGap(Vector3 x, List<Node> nodeList) // check two nodes x,y distance, if pos applicable return true, otherwise return false
+    {
+        int count = nodeList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            Node y = nodeList[i];
+            // make sure two rooms have distance > minGenralOffset
+            if (distance(x, y.transform) < minGeneralOffset)
+            { 
+                return false;
+            }
+            // make sure rooms don't go out of bounds
+            if (x.x < -xBound)
+            {
+                spawnPos.position = new Vector3 (0, spawnPos.position.y, 0);
+                return false;
+            }
+            if (x.x > xBound)
+            {
+                spawnPos.position = new Vector3(0, spawnPos.position.y, 0);
+                return false;
+            }
+            if (x.y < -yBound)
+            {
+                spawnPos.position = new Vector3(spawnPos.position.x, 0, 0);
+                return false;
+            }
+            if (x.y > yBound)
+            {
+                spawnPos.position = new Vector3(spawnPos.position.x, 0, 0);
+                return false;
+            }
+        }
+
+        return true;
+    }
+    // determines next nodes generation direction, using randomized x,y offset, next node builds on the previous spawnPos
     void randomizeNode()
     {
         direction = (Direction)UnityEngine.Random.Range(0, 4);
@@ -100,5 +151,12 @@ public class RoomNodesGenerator : MonoBehaviour
                 spawnPos.position += new Vector3(-randomizeXoffset(), -randomizeYoffset(), 0);
                 break;
         }
+    }
+
+    // returns distance between a vector3 to another object's position
+    private float distance(Vector3 x, Transform y)
+    {
+
+        return (float)math.sqrt(math.pow(x.x - y.position.x, 2) + math.pow(x.y - y.position.y, 2));
     }
 }
