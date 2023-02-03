@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card 
+public class Card
 
 
 
@@ -12,22 +12,24 @@ public class Card
         cardAtk,
         cardHeal,
         cardCurse
-        
-    }
 
+    }
     public enum DmgType
     {
         weapon,
         physical,
         stamina,
-        magic
+        magic,
+        none
 
     }
     public enum Target
     {
         self,
         ranknfile,
-        boss
+        boss,
+        enemy,
+        all
     }
 
     public int cardId;
@@ -37,21 +39,11 @@ public class Card
     public DmgType dmgType;
     public Target target;
     public CardType cardType;
-    public string cardName = "";
+    public string cardTitle = "";
     public string cardDescription = "";
-    public int imageIndex = 0; // card image 
+    
 
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

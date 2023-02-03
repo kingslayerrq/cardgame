@@ -1,3 +1,4 @@
+using RichardQ;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,28 +7,37 @@ using UnityEngine.UI;
 public class CardInstance : MonoBehaviour
 {
 
-    public Image image;
-    public Sprite[] img; // card background
+    
     public int cardId;
-    public int imageIndex;
     public int dmgNum;
+    public int healNum;
+    public int cardCost;
     public Card.CardType cardType;
     public Card.DmgType dmgType;
     public Card.Target target;
-    public Card card; // confirm this card
+    public Sprite artWork;
+    [SerializeField]
+    private SpriteRenderer sRenderer;
 
-    public Text cardTitle;
-    public Text cardDescription;
+    public string cardTitle;
+    public string cardDescription;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        sRenderer = GetComponent<SpriteRenderer>();
+        sRenderer.sprite = artWork;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void loadCardData(CardAssets cardData)
     {
-        
+        cardId = cardData.cardId;
+        cardType = cardData.cardType;
+        dmgType = cardData.dmgType;
+        target = cardData.target;
+        cardCost = cardData.cardCost;
+        dmgNum = cardData.dmgNum;
+        healNum = cardData.healNum;
+        cardTitle = cardData.cardTitle;
+        cardDescription = cardData.cardDescription;
+        artWork = cardData.artWork;
     }
 }

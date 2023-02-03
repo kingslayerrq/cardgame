@@ -19,13 +19,13 @@ namespace RichardQ{
         [SerializeField]
         private int healNum;
         [SerializeField]
-        private DmgType dmgType;
+        private Card.DmgType dmgType;
         [SerializeField]
-        private Target target;
+        private Card.Target target;
         [SerializeField]
-        private CardType cardType;
+        private Card.CardType cardType;
         [SerializeField]
-        private string cardName;
+        private string cardTitle;
         [SerializeField] 
         private string cardDescription;
         [SerializeField]
@@ -40,7 +40,7 @@ namespace RichardQ{
             dmgType = card.dmgType;
             target = card.target;
             cardType = card.cardType;
-            cardName = card.cardName;
+            cardTitle = card.cardTitle;
             cardDescription = card.cardDescription;
             sRenderer.sprite = card.artWork;
 

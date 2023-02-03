@@ -5,28 +5,7 @@ using UnityEngine;
 
 namespace RichardQ{
 
-    public enum CardType
-    {
-        cardAtk,
-        cardHeal,
-        cardCurse
-
-    }
-    public enum DmgType
-    {
-        weapon,
-        physical,
-        stamina,
-        magic
-
-    }
-    public enum Target
-    {
-        self,
-        ranknfile,
-        boss,
-        all
-    }
+    
 
     [CreateAssetMenu(menuName = "ScriptableObjects/ Create CardAssets ")]
     public class CardAssets : ScriptableObject
@@ -38,10 +17,10 @@ namespace RichardQ{
         public int cardCost;
         public int dmgNum;
         public int healNum;
-        public DmgType dmgType;
-        public Target target;
-        public CardType cardType;
-        public string cardName = "";
+        public Card.DmgType dmgType;
+        public Card.Target target;
+        public Card.CardType cardType;
+        public string cardTitle = "";
         public string cardDescription = "";
         public Sprite artWork;
         

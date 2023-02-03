@@ -1,5 +1,8 @@
+using Mono.Cecil;
+using RichardQ;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,25 +10,79 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
 {
     [SerializeField]
     private GameObject CardPrefab;
+    // slots for hand
+    [SerializeField]
+    private List<Transform> cardSlots;
+    
+    
 
-    public int totalCardCount = 20;
-    public int handCount = 7;
-    public int drawPileCount = 13;
-    public int discardPileCount = 0;
+    [Tooltip("Current battle card info")]
+    public CardAssets[] cardArr; // all card in array
+    public List<CardAssets> handList; // hand card in array
+    public List<CardAssets> cardDiscarded; // discard pile
+    public List<CardAssets> cardToDraw; // cardlist use to draw
 
-    public Card[] cardGroup; // all card in array
 
-    public List<Card> cardToDraw; // cardlist use to draw
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        cardArr = new CardAssets[2];
+        // load all cards into array
+        for (int i = 0; i < 2; i++)
+        {
+            cardArr[i] = Resources.Load<CardAssets>("Cards/" + i.ToString());
+            
+        }
+
+        // hardcode out initial hand [for now]
+        // not instantiating cards
+        handList = new List<CardAssets> { cardArr[0], cardArr[0], cardArr[0], cardArr[0], cardArr[0]};
+        cardToDraw = new List<CardAssets> { cardArr[1], cardArr[1], cardArr[1], cardArr[1], cardArr[1]};
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
+        for (int i = 0; i < handList.Count; i++)
+        {
+            CardInstance handCard = Instantiate(CardPrefab, cardSlots[i].position, Quaternion.identity).GetComponent<CardInstance>();
+            handCard.loadCardData(handList[i]);
+        }
     }
+
+    public void drawCards(int drawNum)
+    {
+        // check if there is enough card to draw
+        // or do we need to put the card from discard pile to draw pile
+        if (cardToDraw.Count >= drawNum )
+        {
+            for (int i = 0; i <  drawNum; i++)
+            {
+                // randomly choose a card from draw pile
+                CardAssets drawCard = cardToDraw[UnityEngine.Random.Range(0, cardToDraw.Count)];
+                if (handList.Count == 10)
+                {
+                    // if exceeds hand limits, draw card goes into discard pile
+                    cardDiscarded.Add(drawCard);
+                }
+                else
+                {
+                    // add to hand
+                    handList.Add(drawCard);
+                }
+                
+            }
+        }
+        else
+        {
+            // shuffle discard pile into draw pile
+            foreach (var dc in cardDiscarded)
+            {
+                cardToDraw.Add(dc);
+            }
+            cardDiscarded.Clear();
+            drawCards(drawNum);
+        }
+    }
+
+    
 }
