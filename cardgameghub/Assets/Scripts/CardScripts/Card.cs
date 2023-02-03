@@ -39,7 +39,7 @@ public class Card
     public CardType cardType;
     public string cardName = "";
     public string cardDescription = "";
-    public int imageIdex = 0; // card image 
+    public int imageIndex = 0; // card image 
 
 
 
