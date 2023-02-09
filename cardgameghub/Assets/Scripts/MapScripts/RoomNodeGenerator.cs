@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class RoomNodesGenerator : MonoBehaviour
+public class RoomNodeGenerator : MonoBehaviour
 {
     public enum Direction
     {

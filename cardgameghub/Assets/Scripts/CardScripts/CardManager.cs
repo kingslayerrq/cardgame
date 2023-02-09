@@ -41,13 +41,17 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
 
     private void Start()
     {
-        
-        for (int i = 0; i < handList.Count; i++)
-        {
-            CardInstance handCard = Instantiate(CardPrefab, cardSlots[i].position, Quaternion.identity).GetComponent<CardInstance>();
-            handCard.loadCardData(handList[i]);
-        }
+        handcardDisplay();
     }
+
+    private void Update()
+    {
+        // keeping track of curHandSize
+        int curHandSize = handList.Count;
+        
+
+    }
+
 
     public void drawCards(int drawNum)
     {
@@ -84,5 +88,25 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
         }
     }
 
-    
+    // display the current hand
+    public void handcardDisplay()
+    {
+        // instantiate hand card prefabs
+        for (int i = 0; i < handList.Count; i++)
+        {
+            CardInstance handCard = Instantiate(CardPrefab, cardSlots[i].position, Quaternion.identity).GetComponent<CardInstance>();
+            // change the scale
+            handCard.transform.localScale = new Vector3(0.3f, 0.3f);
+            // add some rotation
+            handCard.transform.Rotate(0f, 0f, 6f);
+            handCard.loadCardData(handList[i]);
+        }
+
+    }
+
+    // update cardSlot after init, each card drawn/discarded/used
+    public void fitCards()
+    {
+
+    }
 }
