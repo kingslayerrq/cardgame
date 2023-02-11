@@ -71,7 +71,7 @@ public class RoomNodeGenerator : MonoBehaviour
         return UnityEngine.Random.Range(minyOffset, maxyOffset);
     }
 
-    //generate map with nodes
+    
     private void createMap()
     {
         for (int i = 0; i < roomNum; i++)
@@ -81,7 +81,7 @@ public class RoomNodeGenerator : MonoBehaviour
             {
                 randomizeNode();
             } while (checkRoomGap(spawnPos.position, roomNodeList) == false);
-            Debug.Log(spawnPos.position.x < -xBound);
+            //Debug.Log(spawnPos.position.x < -xBound);
             
         }
     }
