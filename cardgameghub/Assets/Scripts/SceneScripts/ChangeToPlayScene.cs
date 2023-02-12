@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 namespace RichardQ{
     public class ChangeToPlayScene : MonoBehaviour
     {
-        private Scene curScene;
+       
         
         
 
@@ -17,13 +17,9 @@ namespace RichardQ{
         }
         private void OnMouseDown()
         {
-            // on clicking the roomnode, go to playstate
+            Debug.Log("play");
             GameManager.GMInstance.updateGameState(GameManager.GameState.PlayState);
-            
-            //curScene = SceneManager.GetActiveScene();
-            
-            
-            
+
         }
 
         

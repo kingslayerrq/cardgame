@@ -301,7 +301,6 @@ GameObject:
   m_Component:
   - component: {fileID: 379033428}
   - component: {fileID: 379033427}
-  - component: {fileID: 379033429}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -337,19 +336,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &379033429
+--- !u!1 &797328018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797328020}
+  - component: {fileID: 797328019}
+  m_Layer: 0
+  m_Name: Scenetrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &797328019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379033426}
+  m_GameObject: {fileID: 797328018}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94fed89ed41c5444781ca0737d396173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cur_sceneIndex: 0
+--- !u!4 &797328020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797328018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1610924706
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,8 +391,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1610924708}
   - component: {fileID: 1610924707}
-  - component: {fileID: 1610924710}
   - component: {fileID: 1610924709}
+  - component: {fileID: 1610924710}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -411,7 +442,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8679245, g: 0.16785331, b: 0.16785331, a: 1}
+  m_Color: {r: 0.16862744, g: 0.8666667, b: 0.17353533, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -471,6 +502,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610924706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79becafc9efe16f47af081d0e2611d5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c887080ef6f9d34aa93a340412e2d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

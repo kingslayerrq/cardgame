@@ -1,65 +1,96 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static RichardQ.GameManager;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 namespace RichardQ{
-    public class SceneTransManager : MonoBehaviour
+    // singleton
+    public  class SceneTransManager : MonoBehaviour
     {
 
-        public static SceneTransManager SMInstance;
+        private static SceneTransManager SMInstance;
 
         public int cur_sceneIndex;
+        private List<Scene> sceneList = new List<Scene>();
+
+
+        public static SceneTransManager Instance
+        {
+            get { return SMInstance; }
+        }
 
         private void Awake()
         {
-            GameManager.onStateChanged += GameManagerOnStateChanged;
-            SceneManager.LoadSceneAsync("StartScene");
+            
+            if (SMInstance != null && SMInstance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                SMInstance = this;
+            }
 
+            // load all build scenes into a list
+            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+            {
+                if (scene.enabled)
+                {
+                    Scene loadedScene = SceneManager.GetSceneByPath(scene.path);
+                    sceneList.Add(loadedScene);
+                }
+            }
 
+            // subscribe to gamestate change event
+            GameManager.onStateChanged += SMInstance.GameManagerOnStateChanged;
 
         }
         private void OnDestroy()
         {
-            GameManager.onStateChanged -= GameManagerOnStateChanged;
+            // unsubscribe
+            GameManager.onStateChanged -= SMInstance.GameManagerOnStateChanged;
         }
 
 
         private void GameManagerOnStateChanged(GameManager.GameState state)
         {
-            
             switch (state)
             {
                 case GameState.MenuState:
-                    Debug.Log("firstscene");
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));
+                    SMInstance.handleMenuScene();
                     break;
                 case GameState.MapState:
-
-                    handleMapScene();
+                    SMInstance.handleMapScene();
                     break;
                 case GameState.PlayState:
-                    handlePlayScene();
+                    SMInstance.handlePlayScene();
                     break;
                     
             }
             Debug.Log(state.ToString());
             
         }
-
+        private void handleMenuScene()
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));
+        }
         private void handlePlayScene()
         {
-            Debug.Log("statechanged");
-            SceneManager.SetActiveScene(SceneManager.GetSceneAt(2));
+            
+            SceneManager.LoadScene("PlayScene");
+            Debug.Log(SceneManager.sceneCount);
+            //SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
         }
 
         private void handleMapScene()
         {
-            Debug.Log("statechanged");
-            SceneManager.SetActiveScene(SceneManager.GetSceneAt(1));
+            SceneManager.LoadScene("MapScene");
+            Debug.Log(SceneManager.sceneCount);
         }
 
        
