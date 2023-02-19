@@ -6,11 +6,13 @@ namespace RichardQ{
     public class ChangeToMapScene : MonoBehaviour
     {
 
-        private void OnMouseDown()
+        public void ToMapState()
         {
+            //Debug.Log("clicked");
             GameManager.GMInstance.updateGameState(GameManager.GameState.MapState);
-
         }
+        
+        
     }
 }
 

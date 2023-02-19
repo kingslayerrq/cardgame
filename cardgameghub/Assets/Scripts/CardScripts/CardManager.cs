@@ -1,10 +1,12 @@
 using Mono.Cecil;
 using RichardQ;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using static RichardQ.PlayState;
 
 public class CardManager : MonoBehaviour // handles card actions, card counts in draw/discard/hand pile
 {
@@ -25,6 +27,8 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
 
     private void Awake()
     {
+        // subscribe to playstate substate change event
+        PlayState.onPlayStateSubChange += handlePlayStateSubChange;
         cardArr = new CardAssets[2];
         // load all cards into array
         for (int i = 0; i < 2; i++)
@@ -39,9 +43,15 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
         cardToDraw = new List<CardAssets> { cardArr[1], cardArr[1], cardArr[1], cardArr[1], cardArr[1]};
     }
 
+    // unsubscribe from onSubStateChange event
+    private void OnDestroy()
+    {
+        PlayState.onPlayStateSubChange -= handlePlayStateSubChange;
+    }
+
     private void Start()
     {
-        handcardDisplay();
+        handCardDisplay();
     }
 
     private void Update()
@@ -49,10 +59,40 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
         // keeping track of curHandSize
         int curHandSize = handList.Count;
         
+    }
+
+    // onSubStateChange subscribed method
+    private void handlePlayStateSubChange(PlayState.SubState subState)
+    {
+        switch(subState)
+        {
+            case PlayState.SubState.DrawState:
+                handleDrawState();
+                break;
+            case PlayState.SubState.PlayerState:
+                handlePlayerState();
+                break;
+            case PlayState.SubState.PlayerEndingState:
+                break;
+            case PlayState.SubState.EnemyState:
+                break;
+        }
+    }
+
+    private void handlePlayerState()
+    {
+        Debug.Log("playerState!");
 
     }
 
+    private void handleDrawState()
+    {
+        Debug.Log("drawState!");
+        drawCards(2);
+        GameManager.GMInstance.updateSubState(SubState.PlayerState);
+    }
 
+    // draw cards to hand
     public void drawCards(int drawNum)
     {
         // check if there is enough card to draw
@@ -86,10 +126,11 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
             cardDiscarded.Clear();
             drawCards(drawNum);
         }
+        handCardDisplay();
     }
 
     // display the current hand
-    public void handcardDisplay()
+    public void handCardDisplay()
     {
         // instantiate hand card prefabs
         for (int i = 0; i < handList.Count; i++)

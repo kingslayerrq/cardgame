@@ -21,16 +21,34 @@ namespace RichardQ{
         public GameState State;
 
         private void Awake()
-        { 
-            GMInstance = this;
+        {
+            if (GMInstance != null && GMInstance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                GMInstance = this;
+            }
         }
         public static event Action<GameState> onStateChanged;
 
         private void Start()
         {
-            updateGameState(GameState.MenuState);
+            //updateGameState(GameState.MenuState);
         }
 
+
+        public virtual void OnStateEnter()
+        {
+
+        }
+        
+
+        public virtual void updateSubState(PlayState.SubState subState)
+        {
+
+        }
         public void updateGameState(GameState newState)
         {
             State = newState;

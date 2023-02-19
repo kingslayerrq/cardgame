@@ -44,6 +44,6 @@ TagManager:
   - name: Background
     uniqueID: 3375605445
     locked: 0
-  - name: RoomNode
+  - name: RoomNode_UI
     uniqueID: 591008385
     locked: 0
