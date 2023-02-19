@@ -2,9 +2,10 @@ using RichardQ;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardInstance : MonoBehaviour
+public class CardInstance : MonoBehaviour, CardListen, IPointerDownHandler
 {
 
     
@@ -18,15 +19,21 @@ public class CardInstance : MonoBehaviour
     public Sprite artWork;
     [SerializeField]
     private SpriteRenderer sRenderer;
+    [SerializeField]
+    private UnityEngine.UI.Image img;
 
     public string cardTitle;
     public string cardDescription;
 
     private void Start()
     {
-        sRenderer = GetComponent<SpriteRenderer>();
-        sRenderer.sprite = artWork;
+        //sRenderer = GetComponent<SpriteRenderer>();
+        //sRenderer.sprite = artWork;
+        
+        
     }
+
+    // load the data on to each card prefab
     public void loadCardData(CardAssets cardData)
     {
         cardId = cardData.cardId;
@@ -39,5 +46,29 @@ public class CardInstance : MonoBehaviour
         cardTitle = cardData.cardTitle;
         cardDescription = cardData.cardDescription;
         artWork = cardData.artWork;
+        img = GetComponent<Image>();
+        img.sprite = cardData.artWork;
+        
+
+    }
+
+    
+
+    
+
+    public void moveCard(CardInstance curCard)
+    {
+        Transform origin = this.transform;
+        // get mouse pos
+        Vector3 inputPos = Input.mousePosition;
+        Vector3 difference = origin.position - inputPos;
+        // update card pos
+        this.transform.position += difference;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("down1");
+        
     }
 }

@@ -15,7 +15,7 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
     // slots for hand
     [SerializeField]
     private List<Transform> cardSlots;
-    
+    public Canvas canvas; // canvas where cards spawn on
     
 
     [Tooltip("Current battle card info")]
@@ -23,6 +23,8 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
     public List<CardAssets> handList; // hand card in array
     public List<CardAssets> cardDiscarded; // discard pile
     public List<CardAssets> cardToDraw; // cardlist use to draw
+    public List<CardInstance> cardInstanceList; // cardInstance list
+    
 
 
     private void Awake()
@@ -135,12 +137,15 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
         // instantiate hand card prefabs
         for (int i = 0; i < handList.Count; i++)
         {
-            CardInstance handCard = Instantiate(CardPrefab, cardSlots[i].position, Quaternion.identity).GetComponent<CardInstance>();
+            CardInstance handCard = Instantiate(CardPrefab, canvas.transform).GetComponent<CardInstance>();
+            cardInstanceList.Add(handCard);
+            handCard.transform.position = cardSlots[i].transform.position;
             // change the scale
-            handCard.transform.localScale = new Vector3(0.3f, 0.3f);
+            handCard.transform.localScale = new Vector3(0.9f, 1.2f);
             // add some rotation
             handCard.transform.Rotate(0f, 0f, 6f);
             handCard.loadCardData(handList[i]);
+            
         }
 
     }
@@ -150,4 +155,7 @@ public class CardManager : MonoBehaviour // handles card actions, card counts in
     {
 
     }
+
+    
+    
 }

@@ -19,6 +19,6 @@ MonoBehaviour:
   dmgType: 0
   target: 3
   cardType: 0
-  cardName: Basic Attack
+  cardTitle: 
   cardDescription: Slash your sword at a single enemy
-  artWork: {fileID: 21300000, guid: 7960b9f5a6c94e14a8f919325a3d23e7, type: 3}
+  artWork: {fileID: 21300000, guid: 02845c6fffd3ddf4887e6dc52066ba32, type: 3}

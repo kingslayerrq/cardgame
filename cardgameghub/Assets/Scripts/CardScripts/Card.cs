@@ -32,18 +32,10 @@ public class Card
         all
     }
 
-    public int cardId;
-    public int cardCost;
-    public int dmgNum;
-    public int healNum;
-    public DmgType dmgType;
-    public Target target;
-    public CardType cardType;
-    public string cardTitle = "";
-    public string cardDescription = "";
     
 
 
 
-    
+
+
 }

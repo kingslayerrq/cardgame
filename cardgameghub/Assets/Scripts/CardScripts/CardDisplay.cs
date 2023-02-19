@@ -42,7 +42,7 @@ namespace RichardQ{
             cardType = card.cardType;
             cardTitle = card.cardTitle;
             cardDescription = card.cardDescription;
-            sRenderer.sprite = card.artWork;
+            //sRenderer.sprite = card.artWork;
 
         }
 
