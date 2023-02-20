@@ -47,3 +47,27 @@ TagManager:
   - name: RoomNode_UI
     uniqueID: 591008385
     locked: 0
+  - name: CardOriginal
+    uniqueID: 1658061483
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 914777135
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 2297207301
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 2631606201
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 81759597
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 3287924263
+    locked: 0
+  - name: New Layer 9
+    uniqueID: 1002433905
+    locked: 0
+  - name: CardLifted
+    uniqueID: 2490754889
+    locked: 0

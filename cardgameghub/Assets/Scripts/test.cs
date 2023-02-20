@@ -26,13 +26,13 @@ namespace RichardQ{
         public void OnPointerClick(PointerEventData eventData)
         {
             Debug.Log("click");
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             Debug.Log("DOWN");
-            throw new System.NotImplementedException();
+            
         }
     }
 }
